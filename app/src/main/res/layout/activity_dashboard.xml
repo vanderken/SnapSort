@@ -91,25 +91,20 @@
         android:gravity="center"
         android:padding="24dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="📸"
-            android:textSize="64sp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp"/>
+        <ListView
+            android:id="@+id/listViewFolders"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#1A1A35"
+            android:divider="#333366"
+            android:dividerHeight="1dp"
+            android:textColor="#FFFFFF" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Your photos will appear here."
-            android:textColor="#AAAACC"
-            android:textSize="15sp"
-            android:gravity="center"/>
 
     </LinearLayout>
 
-    <!-- BOTTOM NAVIGATION BAR -->
+
     <LinearLayout
         android:id="@+id/bottomNavBar"
         android:layout_width="match_parent"

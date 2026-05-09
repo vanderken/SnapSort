@@ -2,6 +2,7 @@ package com.example.snapsort.screens.dashboard
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.snapsort.databinding.ActivityDashboardBinding
@@ -11,16 +12,43 @@ import com.example.snapsort.screens.profile.ProfileActivity
 class DashboardActivity : AppCompatActivity(), DashBoardContractActivity.View {
 
     private lateinit var binding: ActivityDashboardBinding
-    private lateinit var presenter: DashBoardContractActivity.Presenter
+    private lateinit var presenter: DashBoardPresenterActivity
+    private val folderList = ArrayList<String>()
+    private lateinit var folderAdapter: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // ✅ STEP 1: Always call super FIRST
         super.onCreate(savedInstanceState)
+
+        // ✅ STEP 2: Create binding SECOND — before anything else
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // ✅ STEP 3: NOW it is safe to use binding
         presenter = DashBoardPresenterActivity(this)
         presenter.onViewCreated()
 
+        // ✅ STEP 4: Set up folder list AFTER binding exists
+        folderList.add("Vacation Photos")
+        folderList.add("School")
+        folderList.add("Family")
+
+        folderAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            folderList
+        )
+
+        binding.listViewFolders.adapter = folderAdapter
+
+        binding.listViewFolders.setOnItemClickListener { _, _, position, _ ->
+            val selectedFolder = folderList[position]
+            val intent = Intent(this, FolderContentsActivity::class.java)
+            intent.putExtra("FOLDER_NAME", selectedFolder)
+            startActivity(intent)
+        }
+
+        // ✅ STEP 5: Set up button listeners
         binding.btnLogout.setOnClickListener {
             presenter.onLogoutClicked()
         }

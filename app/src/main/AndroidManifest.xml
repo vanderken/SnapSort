@@ -20,7 +20,9 @@
 
         <activity android:name=".screens.register.RegisterActivity"/>
         <activity android:name=".screens.dashboard.DashboardActivity"/>
+        <activity android:name=".screens.dashboard.FolderContentsActivity"/>
         <activity android:name=".screens.profile.ProfileActivity"/>
+
 
     </application>
 
